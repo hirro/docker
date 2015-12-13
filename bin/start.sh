@@ -9,7 +9,7 @@ else
     exit 0
 fi
 
-for path in $PWD/images/*; do
+for path in $PWD/images.d/*; do
 	if [[ "$path" =~ /_ ]]
 	then
 		echo "Skipping service $path"

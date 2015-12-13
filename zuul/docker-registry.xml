@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+	<!-- Install using command:
+	firewall-cmd --permanent --zone=public --add-service=docker-registry
+	firewall-cmd --reload
+d
+	-->
+
+<service>
+	<short>Docker Registry</short>
+	<description>Docker Registry Service</description>
+	<port port="5000" protocol="tcp"/>
+</service>
