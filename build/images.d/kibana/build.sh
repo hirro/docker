@@ -2,7 +2,7 @@
 
 # Load prerequisites
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source "$DIR/setenv.sh"
+source "$DIR/../../../bin/setenv.sh"
 
 # Check required variables
 if [ -z "$DOCKER_REGISTRY" ]; then
