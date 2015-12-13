@@ -1,12 +1,20 @@
 #!/bin/bash -e
 
+# Load prerequisites
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$DIR/../../../bin/setenv.sh"
 
-echo "Building image"
+# Check required variables
+if [ -z "$DOCKER_REGISTRY" ]; then
+	echo "Variable DOCKER_REGISTRY not defined"
+	exit;
+else
+	echo "Using DOCKER_REGISTRY [$DOCKER_REGISTRY]"
+fi
+
+# Build image
 docker build -t worktajm-nginx .
-echo "Tagging image: [$DOCKER_REGISTRY]"
+
+# Store 
 docker tag -f worktajm-nginx $DOCKER_REGISTRY/worktajm-nginx
-echo "Pushing image: [$DOCKER_REGISTRY]"
 docker push $DOCKER_REGISTRY/worktajm-nginx
-# docker push $DOCKER_REGISTRY $DOCKER_REGISTRY/worktajm-nginx

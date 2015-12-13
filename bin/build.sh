@@ -1,9 +1,8 @@
 #!/bin/bash
-DOCKER_REGISTRY=zuul:5000
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$DIR/setenv.sh"
 
-for path in $PWD/build/images.d/*; do
-	echo
-	echo
+for path in $DIR/../build/images.d/*; do
 	echo "Building $path"
 	( cd $path && ./build.sh )
 done
