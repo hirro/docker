@@ -2,7 +2,7 @@
 
 # Load prerequisites
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source "$DIR/../../../bin/setenv.sh"
+source "$DIR/../../bin/setenv.sh"
 
 # Check required variables
 if [ -z "$DOCKER_REGISTRY" ]; then
@@ -13,11 +13,10 @@ else
 fi
 
 # Build image
-docker build -t worktajm-elasticsearch .
+docker build -t worktajm-mongodb .
 
 # Store 
-docker tag -f worktajm-elasticsearch  $DOCKER_REGISTRY/worktajm-elasticsearch 
-docker push $DOCKER_REGISTRY/worktajm-elasticsearch 
-
+docker tag -f worktajm-mongodb $DOCKER_REGISTRY/worktajm-mongodb
+docker push $DOCKER_REGISTRY/worktajm-mongodb
 
 

@@ -2,7 +2,7 @@
 
 # Load prerequisites
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source "$DIR/setenv.sh"
+source "$DIR/../../bin/setenv.sh"
 
 # Check required variables
 if [ -z "$DOCKER_REGISTRY" ]; then
@@ -13,10 +13,9 @@ else
 fi
 
 # Build image
-docker build -t worktajm-mongodb .
+docker build -t worktajm-kibana .
 
 # Store 
-docker tag -f worktajm-mongodb $DOCKER_REGISTRY/worktajm-mongodb
-docker push $DOCKER_REGISTRY/worktajm-mongodb
-
+docker tag -f worktajm-kibana $DOCKER_REGISTRY/worktajm-kibana
+docker push $DOCKER_REGISTRY/worktajm-kibana
 

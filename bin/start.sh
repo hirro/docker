@@ -8,12 +8,16 @@ usage() {
 	echo "========"
 	echo "Docker service starter usage" >&2
 	echo " -p profile" >&2
+	echo " -s service" >&2
 } 
 
-while getopts ":p:" opt; do
+while getopts ":p:s:" opt; do
   case $opt in
     p)
       PROFILE=$OPTARG
+      ;;
+    s)
+      SERVICE=$OPTARG
       ;;
     \?)
       usage
@@ -43,16 +47,23 @@ else
 fi
 
 PROFILE_PATH=$PWD/conf/$PROFILE
-if [ -e "$PROFILE_PATH" ]; then
-	for path in $PROFILE_PATH/*; do
-		if [[ "$path" =~ /_ ]]; then
-			echo "Skipping service $path"
-		else	
-			echo "Starting service $path"
-			( cd $PROFILE_PATH && exec $path )
-		fi
-	done
-else
+if [ ! -e "$PROFILE_PATH" ]; then
 	echo "Profile path $PROFILE does not exist"
 	exit 0
 fi
+
+for path in $PROFILE_PATH/*; do
+	if [[ "$path" =~ /_ ]]; then
+		echo "Skipping disabled service: $path"
+	else	
+		if [ -z "$SERVICE" ]; then
+			echo "Starting service $path"
+			( cd $PROFILE_PATH && exec $path )
+		else
+			if [[ "$path" =~ "$SERVICE" ]]; then
+				echo "Starting service $SERVICE"
+				( cd $PROFILE_PATH && exec $path)			
+			fi
+		fi		
+	fi
+done

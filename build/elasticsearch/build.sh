@@ -2,7 +2,7 @@
 
 # Load prerequisites
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source "$DIR/../../../bin/setenv.sh"
+source "$DIR/../../bin/setenv.sh"
 
 # Check required variables
 if [ -z "$DOCKER_REGISTRY" ]; then
@@ -13,9 +13,11 @@ else
 fi
 
 # Build image
-docker build -t worktajm-kibana .
+docker build -t worktajm-elasticsearch .
 
 # Store 
-docker tag -f worktajm-kibana $DOCKER_REGISTRY/worktajm-kibana
-docker push $DOCKER_REGISTRY/worktajm-kibana
+docker tag -f worktajm-elasticsearch  $DOCKER_REGISTRY/worktajm-elasticsearch 
+docker push $DOCKER_REGISTRY/worktajm-elasticsearch 
+
+
 
